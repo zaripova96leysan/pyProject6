@@ -11,7 +11,6 @@ def filter_by_state(spisok, state='EXECUTED'):
 
 def sort_by_date(data, reverse=True):
     """Функция, принимающая список словарей и возвращает отсортированный по дате"""
-        return sorted(data, key=lambda x: x['date'], reverse=reverse)
-
+    return sorted(data, key=lambda x: x['date'], reverse=reverse)
 
 
