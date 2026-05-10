@@ -22,7 +22,8 @@ lint = [
     "isort (>=8.0.1,<9.0.0)"
 ]
 dev = [
-    "flake8 (>=7.3.0,<8.0.0)"
+    "flake8 (>=7.3.0,<8.0.0)",
+    "pytest (>=9.0.3,<10.0.0)"
 ]
 [tool.black]
 line-length = 88
@@ -45,3 +46,4 @@ ignore_missing_imports = true
 max-line-length = 88
 extend-ignore = ["E203", "W503"]
 exclude = [".git", "__pycache__", "build", "dist"]
+
