@@ -1,10 +1,11 @@
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.widget import mask_account_card, get_date
+from src.widget import get_date, mask_account_card
 
 
 @pytest.fixture
