@@ -1,11 +1,11 @@
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.processing import filter_by_state, sort_by_date
-
 
 # ==================== ФИКСТУРЫ ====================
 
