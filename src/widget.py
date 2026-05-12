@@ -3,13 +3,13 @@ def mask_account_card(card_or_account_info: str) -> str:
     if not card_or_account_info:
         return ""
     parts = card_or_account_info.split()
-    # Если только одно слово (нет номера)
+
+
     if len(parts) == 1:
         return card_or_account_info
     number = parts[-1]
     name = " ".join(parts[:-1])
     if "Счет" in name or "счет" in name:
-        # Для счёта: ** + последние 4 цифры
         if len(number) >= 4:
             masked_number = "**" + number[-4:]
         else:
