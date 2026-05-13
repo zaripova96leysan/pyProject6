@@ -3,9 +3,9 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.widget import get_date, mask_account_card
+from src.widget import mask_account_card, get_date  # noqa: E402
 
 
 @pytest.fixture
@@ -18,12 +18,15 @@ def card_data():
     }
 
 
-@pytest.mark.parametrize("input_data, expected", [
-    ("Visa 1234567890123456", "Visa 1234******3456"),
-    ("MasterCard 5555666677778888", "MasterCard 5555******8888"),
-    ("Счет 12345678901234567890", "Счет **7890"),
-    ("", ""),
-])
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [
+        ("Visa 1234567890123456", "Visa 1234******3456"),
+        ("MasterCard 5555666677778888", "MasterCard 5555******8888"),
+        ("Счет 12345678901234567890", "Счет **7890"),
+        ("", ""),
+    ],
+)
 def test_mask_account_card(input_data, expected):
     """Тест маскирования карт и счетов"""
     assert mask_account_card(input_data) == expected
@@ -35,11 +38,14 @@ def test_mask_account_card_with_fixture(card_data):
     assert mask_account_card(card_data["счет"]) == "Счет **7890"
 
 
-@pytest.mark.parametrize("input_date, expected", [
-    ("2024-03-15T12:30:45.123456", "15.03.2024"),
-    ("2023-12-25T10:00:00", "25.12.2023"),
-    ("", ""),
-])
+@pytest.mark.parametrize(
+    "input_date, expected",
+    [
+        ("2024-03-15T12:30:45.123456", "15.03.2024"),
+        ("2023-12-25T10:00:00", "25.12.2023"),
+        ("", ""),
+    ],
+)
 def test_get_date(input_date, expected):
     """Тест преобразования даты"""
     assert get_date(input_date) == expected
@@ -64,7 +70,10 @@ def test_mask_account_card_card_variants():
     assert mask_account_card("Visa 1234") == "Visa 1234"
     assert mask_account_card("MasterCard 12345678") == "MasterCard 12345678"
     assert mask_account_card("Мир 9876543210987654") == "Мир 9876******7654"
-    assert mask_account_card("American Express 1234567890123456") == "American Express 1234******3456"
+    assert (
+        mask_account_card("American Express 1234567890123456")
+        == "American Express 1234******3456"
+    )
 
 
 def test_get_date_complete_coverage():
@@ -83,4 +92,7 @@ def test_mask_account_card_empty_string():
 
 
 def test_mask_account_card_name_with_spaces():
-    assert mask_account_card("American Express 1234567890123456") == "American Express 1234******3456"
+    assert (
+        mask_account_card("American Express 1234567890123456")
+        == "American Express 1234******3456"
+    )

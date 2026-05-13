@@ -3,25 +3,31 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_card_number, get_mask_account  # noqa: E402
 
 
-@pytest.mark.parametrize("card_number, expected", [
-    ("1234567890123456", "1234******3456"),
-    ("1111222233334444", "1111******4444"),
-    ("", ""),
-])
+@pytest.mark.parametrize(
+    "card_number, expected",
+    [
+        ("1234567890123456", "1234******3456"),
+        ("1111222233334444", "1111******4444"),
+        ("", ""),
+    ],
+)
 def test_get_mask_card_number(card_number, expected):
     assert get_mask_card_number(card_number) == expected
 
 
-@pytest.mark.parametrize("account, expected", [
-    ("12345678901234567890", "**7890"),
-    ("11112222333344445555", "**5555"),
-    ("", ""),
-])
+@pytest.mark.parametrize(
+    "account, expected",
+    [
+        ("12345678901234567890", "**7890"),
+        ("11112222333344445555", "**5555"),
+        ("", ""),
+    ],
+)
 def test_get_mask_account(account, expected):
     assert get_mask_account(account) == expected
 

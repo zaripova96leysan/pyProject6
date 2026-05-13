@@ -2,12 +2,12 @@ import pytest
 import sys
 import os
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.processing import filter_by_state, sort_by_date
-
+from src.processing import filter_by_state, sort_by_date  # noqa: E402
 
 # ==================== ФИКСТУРЫ ====================
+
 
 @pytest.fixture
 def sample_transactions():
@@ -33,12 +33,16 @@ def transactions_same_date():
 
 # ==================== ТЕСТЫ ДЛЯ filter_by_state ====================
 
-@pytest.mark.parametrize("state, expected_ids", [
-    ("EXECUTED", [1, 3, 5]),
-    ("PENDING", [2]),
-    ("CANCELED", [4]),
-    ("UNKNOWN", []),
-])
+
+@pytest.mark.parametrize(
+    "state, expected_ids",
+    [
+        ("EXECUTED", [1, 3, 5]),
+        ("PENDING", [2]),
+        ("CANCELED", [4]),
+        ("UNKNOWN", []),
+    ],
+)
 def test_filter_by_state(sample_transactions, state, expected_ids):
     """Тест фильтрации по статусу"""
     filtered = filter_by_state(sample_transactions, state)
@@ -54,6 +58,7 @@ def test_filter_by_state_no_key(sample_transactions):
 
 
 # ==================== ТЕСТЫ ДЛЯ sort_by_date ====================
+
 
 def test_sort_by_date_descending(sample_transactions):
     """Тест сортировки по убыванию (новые сначала)"""
@@ -83,7 +88,6 @@ def test_sort_by_date_empty_list():
     """Тест: пустой список"""
     result = sort_by_date([], reverse=True)  # ← reverse=True
     assert result == []
-
 
 
 def test_sort_by_date_invalid_format():
