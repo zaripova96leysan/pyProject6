@@ -4,7 +4,6 @@ def mask_account_card(card_or_account_info: str) -> str:
         return ""
     parts = card_or_account_info.split()
 
-
     if len(parts) == 1:
         return card_or_account_info
     number = parts[-1]
@@ -41,4 +40,3 @@ def get_date(date_string: str) -> str:
         return f"{day}.{month}.{year}"
     except (ValueError, AttributeError, IndexError):
         return date_string
-
