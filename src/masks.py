@@ -1,18 +1,18 @@
 def get_mask_card_number(card_number: str) -> str:
-    """Функция get_mask_card_number принимает на вход номер карты в виде строки"""
-    # Убираем все пробелы из карты
-    cleaned_number = card_number.replace(" ", "")
-
-    if len(cleaned_number) != 16:
-        print("Номер карты должен содержать 16 цифр")
-        return ""  # или можно вернуть исходную строку
-
-    # Маскируем номер: первые 6 цифр, затем 6 звездочек, последние 4 цифры
-    masked = f"{cleaned_number[:6]}******{cleaned_number[-4:]}"
-    return masked
+    """Маскирует номер карты: первые 4 цифры, потом 6 звёздочек, потом последние 4 цифры"""
+    if not card_number:
+        return ""
+    if len(card_number) < 16:
+        return card_number
+    # ПРАВИЛЬНО: первые 4 цифры + ****** + последние 4 цифры
+    return card_number[:4] + "******" + card_number[-4:]
 
 
 def get_mask_account(account_number: str) -> str:
-    """Маскирует номер счета: видны только последние 4 цифры, перед ними **"""
-    # Берем последние 4 цифры, перед ними ставим две звездочки
-    return f"**{account_number[-4:]}"
+    """Маскирует номер счёта: две звёздочки и последние 4 цифры"""
+    if not account_number:
+        return ""  # Пустая строка возвращает пустую строку
+    if len(account_number) < 4:
+        return account_number
+    # ПРАВИЛЬНО: ** + последние 4 цифры
+    return "**" + account_number[-4:]
